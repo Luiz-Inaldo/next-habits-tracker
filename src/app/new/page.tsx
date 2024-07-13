@@ -1,4 +1,5 @@
 'use client'
+import { setHabits } from '@/utils/api'
 import ReturnButton from '@/components/Buttons/Return'
 import Container from '@/components/Container'
 import MainLayout from '@/components/Layout'
@@ -17,41 +18,21 @@ export default function Register() {
     const [resultType, setResultType] = React.useState<string>('');
 
     const onSubmit = async (data: HabitsProps) => {
-        /*  creating habit on localStorage.
-            This block will verify if the key already exists
-            in localStorage. If true, will increment the new habit
-            on the list. If false, will create the key and set a 
-            new habit on it.
-            P.S.: If the habit name already exists in list, will throw
-            a error.
-        */
-        
-        console.log(data);
-        // setLoading(true);
-        // if (!localStorage.getItem('habits')) {
-        //     localStorage.setItem('habits', JSON.stringify([data]));
-        //     setResultType('success');
-        //     setModalOpen(true);
-        // } else {
-        //     const habits: HabitsProps[] = JSON.parse(localStorage.getItem('habits') || '');
-        //     let isDuplicated: boolean = false;
-        //     // verifying if the habit already exists to fire error message
-        //     habits.forEach(habit => {
-        //         if (habit.name.toLowerCase() === data.name.toLowerCase()) {
-        //             isDuplicated = true;
-        //             return;
-        //         }
-        //     })
 
-        //     if (isDuplicated) {
-        //         setResultType('error');
-        //     } else {
-        //         localStorage.setItem('habits', JSON.stringify([...JSON.parse(localStorage.getItem('habits')!), data]));
-        //         setResultType('success');
-        //     }
-        //     setModalOpen(true);
-        // }
-        // setLoading(false);
+        setLoading(true);
+        
+        const response = await setHabits(data);
+
+        if (response === 1) {
+            setLoading(false);
+            setModalOpen(true);
+            setResultType('success');
+        } else {
+            setLoading(false);
+            setModalOpen(true);
+            setResultType('error');
+        }
+        
     }
 
     return (
@@ -135,7 +116,7 @@ export default function Register() {
                 </>
             </Container>
             <Suspense fallback={null}>
-                <AlertMessage messageType={resultType} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                <AlertMessage loading={loading} messageType={resultType} modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </Suspense>
         </MainLayout>
     )
