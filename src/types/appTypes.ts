@@ -1,8 +1,8 @@
 export type HabitsProps = {
-    [key: string]: {
-        priority: string;
-        days: Object;
-    }
+    id: string;
+    name: string;
+    priority: string;
+    days: Record<string, boolean | undefined>;
 }
 
 export type AlertModalProps = {
@@ -11,7 +11,3 @@ export type AlertModalProps = {
     modalOpen: boolean;
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-// export type ErrorProps = {
-//     duplicate: boolean
-// }
