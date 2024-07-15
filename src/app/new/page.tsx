@@ -1,11 +1,11 @@
 'use client'
-import { setHabits } from '@/utils/api'
 import ReturnButton from '@/components/Buttons/Return'
 import Container from '@/components/Container'
 import MainLayout from '@/components/Layout'
 import AlertMessage from '@/components/Modals/Alert'
+import useLocalStorage from '@/hooks/useLocalStorage'
 import { HabitsProps } from '@/types/appTypes'
-import React, { Suspense } from 'react'
+import React, { Suspense, use } from 'react'
 import { useForm } from 'react-hook-form'
 import { BiCheck } from 'react-icons/bi'
 import { ImSpinner2 } from 'react-icons/im'
@@ -13,6 +13,7 @@ import { ImSpinner2 } from 'react-icons/im'
 export default function Register() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<HabitsProps>();
+    const { setHabits } = useLocalStorage();
     const [loading, setLoading] = React.useState<boolean>(false);
     const [modalOpen, setModalOpen] = React.useState<boolean>(false);
     const [resultType, setResultType] = React.useState<string>('');
@@ -20,10 +21,10 @@ export default function Register() {
     const onSubmit = async (data: HabitsProps) => {
 
         setLoading(true);
-        
+
         const response = await setHabits(data);
 
-        if (response === 1) {
+        if (response === 0) {
             setLoading(false);
             setModalOpen(true);
             setResultType('success');
@@ -32,7 +33,7 @@ export default function Register() {
             setModalOpen(true);
             setResultType('error');
         }
-        
+
     }
 
     return (
