@@ -1,7 +1,7 @@
 'use client'
 import ReturnButton from '@/components/Buttons/Return'
 import Container from '@/components/Container'
-import MainLayout from '@/components/Layout'
+import MainLayout from '@/components/Layout/MainLayout'
 import AlertMessage from '@/components/Modals/Alert'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { HabitsProps } from '@/types/appTypes'
