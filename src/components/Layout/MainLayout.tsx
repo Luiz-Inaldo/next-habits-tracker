@@ -3,7 +3,7 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <main className="flex min-h-screen items-center justify-center">
+        <main className="flex min-h-screen max-w-md mx-auto items-center justify-center">
             <div className='w-full h-screen p-4 flex flex-col'>
                 <div className='mb-10 w-fit mx-auto'>
                     <div className='flex gap-2 items-end mb-2'>

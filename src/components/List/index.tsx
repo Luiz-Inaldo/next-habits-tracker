@@ -3,6 +3,7 @@ import React from 'react'
 import { BiTrash } from 'react-icons/bi';
 import DayCheck from '../DayCheck';
 import useLocalStorage from '@/hooks/useLocalStorage';
+import Link from 'next/link';
 
 const HabitsList = () => {
 
@@ -45,9 +46,11 @@ const HabitsList = () => {
                                 <li key={index} className='p-4 rounded-md bg-neutral-800'>
                                     <div className='flex justify-between items-center w-full'>
                                         <div className='flex flex-col gap-2'>
-                                            <h2 className='text-lg font-light text-snow'>
-                                                {habit.name}
-                                            </h2>
+                                            <Link href={`/${habit.name}`}>
+                                                <h2 className='text-lg font-light text-snow'>
+                                                    {habit.name}
+                                                </h2>
+                                            </Link>
                                             <div className='flex gap-2 items-center'>
                                                 <span>prioridade: </span>
                                                 <span className={`w-fit text-sm py-x px-3 rounded-full ${habit.priority === 'baixa' ? 'bg-green-400 text-black-2' : habit.priority === 'moderada' ? 'bg-yellow-300 text-black-2' : 'bg-red text-snow'}`}>{habit.priority}</span>
